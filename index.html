@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>活動報名與智慧行政管理系統 - 新北市信義國小工作成果語音簡報</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- FontAwesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts: Inter & Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Noto Sans TC"', 'Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#1d4ed8',
+              600: '#1e40af',
+              700: '#1d3557',
+              800: '#0f172a',
+              900: '#0a1128',
+              accent: '#06b6d4',
+              steam: '#10b981',
+              warning: '#f59e0b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.6);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+
+    /* Soundwave animation for audio narration */
+    .sound-bar {
+      animation: soundPulse 1.2s ease-in-out infinite alternate;
+    }
+    @keyframes soundPulse {
+      0% { height: 4px; }
+      100% { height: 24px; }
+    }
+
+    /* Slide transition */
+    .slide-enter-active {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Subtle pulse glow for key highlights */
+    @keyframes subtleGlow {
+      0%, 100% { box-shadow: 0 0 15px rgba(6, 182, 212, 0.3); }
+      50% { box-shadow: 0 0 25px rgba(6, 182, 212, 0.6); }
+    }
+    .badge-glow {
+      animation: subtleGlow 3s infinite;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-cyan-500 selection:text-white overflow-x-hidden">
+
+  <!-- Top Navigation Header -->
+  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur-md sticky top-0 z-40 px-4 py-3 sm:px-6">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
+      <!-- Title & School badge -->
+      <div class="flex items-center gap-3 min-w-0">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-cyan-500 to-emerald-400 flex items-center justify-center text-white shadow-lg shrink-0">
+          <i class="fa-solid fa-graduation-cap text-lg"></i>
+        </div>
+        <div class="truncate">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-semibold px-2 py-0.5 rounded bg-blue-900/70 text-blue-300 border border-blue-700/50">新北信義國小</span>
+            <span class="text-xs font-medium text-emerald-400 hidden md:inline-flex items-center gap-1">
+              <i class="fa-solid fa-microchip"></i> STEAM 跨域分團
+            </span>
+          </div>
+          <h1 class="text-sm sm:text-base font-bold text-white tracking-tight truncate">
+            活動報名與智慧行政管理系統 <span class="text-slate-400 font-normal hidden lg:inline">｜ 工作語音網頁簡報</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Action Buttons Header -->
+      <div class="flex items-center gap-2 shrink-0">
+        <!-- View Mode Switch: Slides vs Education Bureau Graphic Card -->
+        <div class="bg-slate-800 p-1 rounded-xl flex items-center border border-slate-700">
+          <button id="btnViewSlides" onclick="switchView('slides')" class="px-3 py-1.5 text-xs font-medium rounded-lg transition-all flex items-center gap-1.5 bg-blue-600 text-white shadow-sm">
+            <i class="fa-solid fa-desktop"></i>
+            <span class="hidden sm:inline">簡報模式</span>
+          </button>
+          <button id="btnViewCard" onclick="switchView('card')" class="px-3 py-1.5 text-xs font-medium rounded-lg transition-all flex items-center gap-1.5 text-slate-400 hover:text-slate-200">
+            <i class="fa-solid fa-id-card"></i>
+            <span class="hidden sm:inline">115.10 圖卡規格</span>
+          </button>
+          <button id="btnViewTable" onclick="switchView('table')" class="px-3 py-1.5 text-xs font-medium rounded-lg transition-all flex items-center gap-1.5 text-slate-400 hover:text-slate-200">
+            <i class="fa-solid fa-table-list"></i>
+            <span class="hidden md:inline">對照總表</span>
+          </button>
+        </div>
+
+        <!-- External Live Test Link Trigger -->
+        <button onclick="openLiveDemoModal()" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-semibold shadow-md hover:shadow-emerald-900/40 transition flex items-center gap-1.5 border border-emerald-400/30">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          <span>開啟測試系統</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 flex flex-col justify-between">
+
+    <!-- VIEW 1: INTERACTIVE PRESENTATION SLIDES (DEFAULT) -->
+    <div id="slidesViewContainer" class="flex-1 flex flex-col justify-between">
+      
+      <!-- Slide Progress Bar & Top Meta -->
+      <div class="mb-4 flex items-center justify-between text-xs text-slate-400">
+        <div class="flex items-center gap-2">
+          <span class="font-bold text-cyan-400" id="slideNumberDisplay">Slide 1 / 7</span>
+          <span class="text-slate-600">•</span>
+          <span id="slideCategoryDisplay" class="text-slate-300 font-medium">主題首頁</span>
+        </div>
+
+        <!-- TTS Narration Status Pill -->
+        <div id="narrationPill" class="flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs">
+          <div id="soundBars" class="flex items-center gap-0.5 h-3 opacity-30">
+            <span class="w-1 bg-cyan-400 sound-bar rounded-full" style="animation-delay: 0.1s;"></span>
+            <span class="w-1 bg-cyan-400 sound-bar rounded-full" style="animation-delay: 0.3s;"></span>
+            <span class="w-1 bg-cyan-400 sound-bar rounded-full" style="animation-delay: 0.2s;"></span>
+            <span class="w-1 bg-cyan-400 sound-bar rounded-full" style="animation-delay: 0.4s;"></span>
+          </div>
+          <span id="ttsStatusText" class="text-slate-400">語音待命</span>
+        </div>
+      </div>
+
+      <!-- SLIDE STACK -->
+      <div class="relative bg-slate-900/80 rounded-2xl border border-slate-800 shadow-2xl p-6 sm:p-8 md:p-10 flex-1 flex flex-col justify-center min-h-[480px] overflow-hidden">
+        
+        <!-- Decorative Ambient Light Background -->
+        <div class="absolute -top-32 -left-32 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-32 -right-32 w-80 h-80 bg-cyan-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <!-- SLIDE 1: Title & Overview -->
+        <div id="slide-0" class="slide-content space-y-6">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-950/80 border border-blue-500/30 text-blue-300 text-xs font-semibold badge-glow">
+            <i class="fa-solid fa-award text-cyan-400"></i>
+            新北市智慧校務行政應用分享 115.10
+          </div>
+          
+          <div class="space-y-3">
+            <h2 class="text-2xl sm:text-4xl md:text-5xl font-black text-white leading-tight tracking-tight">
+              數位轉型 × 行政減負<br>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-300">
+                活動報名與智慧行政管理系統
+              </span>
+            </h2>
+            <p class="text-slate-300 text-sm sm:text-base md:text-lg max-w-3xl leading-relaxed">
+              以 Google Workspace 教育生態圈打造「零成本維運、高公信抽籤、資安合規保護」的一站式校務微服務解決方案。
+            </p>
+          </div>
+
+          <!-- Highlights Grid -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+            <div class="p-3.5 rounded-xl bg-slate-800/60 border border-slate-700/60">
+              <div class="text-cyan-400 font-bold text-lg sm:text-2xl">90% +</div>
+              <div class="text-xs text-slate-400 mt-0.5">行政耗時縮減</div>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-800/60 border border-slate-700/60">
+              <div class="text-emerald-400 font-bold text-lg sm:text-2xl">$0 元</div>
+              <div class="text-xs text-slate-400 mt-0.5">主機伺服器費用</div>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-800/60 border border-slate-700/60">
+              <div class="text-blue-400 font-bold text-lg sm:text-2xl">100%</div>
+              <div class="text-xs text-slate-400 mt-0.5">個資去識別合規</div>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-800/60 border border-slate-700/60">
+              <div class="text-purple-400 font-bold text-lg sm:text-2xl">4 處室</div>
+              <div class="text-xs text-slate-400 mt-0.5">業務分權隔離</div>
+            </div>
+          </div>
+
+          <!-- Presenter Attribution Badge -->
+          <div class="pt-4 flex flex-wrap items-center gap-3 text-xs text-slate-300 border-t border-slate-800/80">
+            <div class="flex items-center gap-2">
+              <span class="w-7 h-7 rounded-full bg-emerald-600 flex items-center justify-center text-white font-bold"><i class="fa-solid fa-compass-drafting text-xs"></i></span>
+              <span class="font-bold text-emerald-400">報告單位：新北市國教輔導團 STEAM 跨域分團</span>
+            </div>
+            <span class="text-slate-600">|</span>
+            <div class="flex items-center gap-1.5 text-cyan-300">
+              <i class="fa-solid fa-stopwatch text-amber-400"></i>
+              <span>60 秒極速語音導覽模式</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 2: Workplace Pain Points -->
+        <div id="slide-1" class="slide-content hidden space-y-5">
+          <div>
+            <span class="text-xs font-semibold uppercase tracking-wider text-rose-400 flex items-center gap-1.5">
+              <i class="fa-solid fa-triangle-exclamation"></i> Workplace Pain Points
+            </span>
+            <h2 class="text-xl sm:text-3xl font-extrabold text-white mt-1">校務活動行政之四大工作痛點</h2>
+            <p class="text-slate-400 text-xs sm:text-sm mt-1">過去仰賴通用表單與紙本人工比對，長期造成行政同仁沉重行政負擔與法規風險。</p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Pain 1 -->
+            <div class="p-4 rounded-xl bg-rose-950/20 border border-rose-900/40 hover:border-rose-700/60 transition group">
+              <div class="flex items-start gap-3">
+                <div class="w-9 h-9 rounded-lg bg-rose-900/50 text-rose-300 flex items-center justify-center font-bold text-base shrink-0 group-hover:scale-105 transition">
+                  <i class="fa-solid fa-filter-circle-xmark"></i>
+                </div>
+                <div>
+                  <h3 class="text-sm sm:text-base font-bold text-white group-hover:text-rose-200">1. 資格比對耗時易錯</h3>
+                  <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+                    通用表單無法即時限制「特定年級」，常發生跨年級誤報，承辦人員需逐筆人工電訪或查核學籍，審查耗時費神。
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pain 2 -->
+            <div class="p-4 rounded-xl bg-amber-950/20 border border-amber-900/40 hover:border-amber-700/60 transition group">
+              <div class="flex items-start gap-3">
+                <div class="w-9 h-9 rounded-lg bg-amber-900/50 text-amber-300 flex items-center justify-center font-bold text-base shrink-0 group-hover:scale-105 transition">
+                  <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <div>
+                  <h3 class="text-sm sm:text-base font-bold text-white group-hover:text-amber-200">2. 個資法規遵循風險</h3>
+                  <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+                    傳統試算表公開名冊時缺乏動態脫敏遮罩，學童中文姓名、家長手機與信箱容易意外公開，具有個資法違反風險。
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pain 3 -->
+            <div class="p-4 rounded-xl bg-orange-950/20 border border-orange-900/40 hover:border-orange-700/60 transition group">
+              <div class="flex items-start gap-3">
+                <div class="w-9 h-9 rounded-lg bg-orange-900/50 text-orange-300 flex items-center justify-center font-bold text-base shrink-0 group-hover:scale-105 transition">
+                  <i class="fa-solid fa-dice"></i>
+                </div>
+                <div>
+                  <h3 class="text-sm sm:text-base font-bold text-white group-hover:text-orange-200">3. 抽籤公信與簽到繁冗</h3>
+                  <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+                    熱門營隊名額爭議大，人工抽籤常生公信質疑；且活動當日紙本簽到表需手動複製貼上 Word 重繪核章欄位，排版繁瑣。
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pain 4 -->
+            <div class="p-4 rounded-xl bg-indigo-950/20 border border-indigo-900/40 hover:border-indigo-700/60 transition group">
+              <div class="flex items-start gap-3">
+                <div class="w-9 h-9 rounded-lg bg-indigo-900/50 text-indigo-300 flex items-center justify-center font-bold text-base shrink-0 group-hover:scale-105 transition">
+                  <i class="fa-solid fa-user-lock"></i>
+                </div>
+                <div>
+                  <h3 class="text-sm sm:text-base font-bold text-white group-hover:text-indigo-200">4. 報名名冊個資未妥善保護</h3>
+                  <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+                    傳統名單公開或跨處室共享常因缺乏嚴格動態隱碼，易造成學童與家長敏感聯絡資訊外洩，衍生法規爭議。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 3: Architecture & Technologies -->
+        <div id="slide-2" class="slide-content hidden space-y-5">
+          <div>
+            <span class="text-xs font-semibold uppercase tracking-wider text-cyan-400 flex items-center gap-1.5">
+              <i class="fa-solid fa-layer-group"></i> Architecture & Technologies
+            </span>
+            <h2 class="text-xl sm:text-3xl font-extrabold text-white mt-1">工具應用與雲端微服務架構</h2>
+            <p class="text-slate-400 text-xs sm:text-sm mt-1">善用新北市教育雲 Workspace 生態，實踐 STEAM 跨域精神，零租賃預算建置。</p>
+          </div>
+
+          <!-- Architecture Visual Schema -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+            <!-- Front End -->
+            <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-emerald-400 uppercase">前端層 (SPA)</span>
+                <span class="text-slate-400 text-xs"><i class="fa-brands fa-vuejs text-emerald-400 text-sm"></i> Vue 3</span>
+              </div>
+              <h4 class="text-sm font-bold text-white">響應式單頁網頁</h4>
+              <ul class="text-xs text-slate-300 space-y-1 list-disc list-inside">
+                <li>國字班級即時正規防呆比對</li>
+                <li>即時個人去識別化預覽視窗</li>
+                <li>Tailwind CSS 跨手機電腦介面</li>
+                <li>單鍵四合一標準公文簽到列印</li>
+              </ul>
+            </div>
+
+            <!-- Backend Services -->
+            <div class="p-4 rounded-xl bg-blue-950/40 border border-blue-800/60 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-blue-400 uppercase">運算層 (GAS)</span>
+                <span class="text-slate-400 text-xs"><i class="fa-solid fa-gears text-blue-400"></i> Microservice</span>
+              </div>
+              <h4 class="text-sm font-bold text-white">Google Apps Script 微服務</h4>
+              <ul class="text-xs text-slate-300 space-y-1 list-disc list-inside">
+                <li><code class="text-blue-300">LockService</code> 互斥併發防超賣</li>
+                <li>Fisher-Yates 抽籤 ＋ SHA-256 簽章</li>
+                <li>加鹽 SHA-256 密碼雜湊認證</li>
+                <li>GmailApp 自動遞送確認信與通知</li>
+              </ul>
+            </div>
+
+            <!-- Database -->
+            <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-purple-400 uppercase">資料庫層 (Sheets)</span>
+                <span class="text-slate-400 text-xs"><i class="fa-solid fa-table text-purple-400"></i> Sheets DB</span>
+              </div>
+              <h4 class="text-sm font-bold text-white">正規化雲端試算表 (4 表)</h4>
+              <ul class="text-xs text-slate-300 space-y-1 list-disc list-inside">
+                <li><code class="text-purple-300">Events</code> 活動主檔與年級對象</li>
+                <li><code class="text-purple-300">Registrations</code> 明文名冊與抽籤狀態</li>
+                <li><code class="text-purple-300">SystemAdmins</code> 管理員權限清冊</li>
+                <li><code class="text-purple-300">AuditLogs</code> 安全雜湊稽核軌跡</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-800/50 flex items-center justify-between text-xs text-emerald-300">
+            <span class="flex items-center gap-2">
+              <i class="fa-solid fa-circle-check"></i>
+              <strong>零主機建置成本：</strong> 100% 部署於 G Suite 教育版環境，年維護租金 $0 元。
+            </span>
+            <span class="bg-emerald-900/60 px-2 py-0.5 rounded text-[11px] font-mono border border-emerald-700/50 hidden sm:inline">
+              V8 Engine Enabled
+            </span>
+          </div>
+        </div>
+
+        <!-- SLIDE 4: Key Workflow & Features -->
+        <div id="slide-3" class="slide-content hidden space-y-5">
+          <div>
+            <span class="text-xs font-semibold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Key Workflow & Innovations
+            </span>
+            <h2 class="text-xl sm:text-3xl font-extrabold text-white mt-1">核心創新解法與行政流程</h2>
+            <p class="text-slate-400 text-xs sm:text-sm mt-1">從報名防呆、公正抽籤到公文表單產出，全流程自動化落實行政減負。</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+            <!-- Step 1 -->
+            <div class="p-4 rounded-xl bg-slate-800/70 border border-slate-700/80 relative">
+              <div class="absolute -top-3 left-4 px-2 py-0.5 rounded-full bg-cyan-600 text-white font-black text-xs">
+                步驟 1
+              </div>
+              <h4 class="font-bold text-white text-sm mt-2 flex items-center gap-2">
+                <i class="fa-solid fa-shield-halved text-cyan-400"></i>
+                智慧前台資格防呆
+              </h4>
+              <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                規範國字年級與班級（如「五年2班」），前端即時正規解析。非符合年級即時提示紅框並禁用按鈕，同時呈現遮罩預覽與發送 HTML 確認信。
+              </p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="p-4 rounded-xl bg-slate-800/70 border border-slate-700/80 relative">
+              <div class="absolute -top-3 left-4 px-2 py-0.5 rounded-full bg-blue-600 text-white font-black text-xs">
+                步驟 2
+              </div>
+              <h4 class="font-bold text-white text-sm mt-2 flex items-center gap-2">
+                <i class="fa-solid fa-fingerprint text-blue-400"></i>
+                二階段公信抽籤演算
+              </h4>
+              <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                第一階段「身分優先保障抽取」；第二階段「Fisher-Yates 現代隨機洗牌」。抽籤結束後運算不可逆 SHA-256 數位防偽指紋存證備查。
+              </p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="p-4 rounded-xl bg-slate-800/70 border border-slate-700/80 relative">
+              <div class="absolute -top-3 left-4 px-2 py-0.5 rounded-full bg-emerald-600 text-white font-black text-xs">
+                步驟 3
+              </div>
+              <h4 class="font-bold text-white text-sm mt-2 flex items-center gap-2">
+                <i class="fa-solid fa-print text-emerald-400"></i>
+                四合一公文簽到列印
+              </h4>
+              <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                單鍵匯出 4 種標準 A4 表單（營隊簽到表、營隊名冊、活動簽到表、活動名單），自帶信義國小正式表頭、總額統計與三級核章欄。
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-slate-800/50 p-3 rounded-xl border border-slate-700/60 text-xs text-slate-300 flex items-center gap-2">
+            <i class="fa-solid fa-lightbulb text-amber-400 text-sm"></i>
+            <span><strong>實務成效：</strong> 承辦人免除動輒數小時的表格剪貼與字型排版，5 秒即可完成正式公文名冊列印！</span>
+          </div>
+        </div>
+
+        <!-- SLIDE 5: Data Masking & Privacy Protection -->
+        <div id="slide-4" class="slide-content hidden space-y-5">
+          <div>
+            <span class="text-xs font-semibold uppercase tracking-wider text-purple-400 flex items-center gap-1.5">
+              <i class="fa-solid fa-user-shield"></i> Data Masking & Privacy Protection
+            </span>
+            <h2 class="text-xl sm:text-3xl font-extrabold text-white mt-1">報名資訊隱碼方式處理，以保護報名者個資</h2>
+            <p class="text-slate-400 text-xs sm:text-sm mt-1">落實嚴密伺服端動態正則脫敏引擎與即時預覽，全面杜絕個資外洩風險。</p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Track A: Dynamic Masking -->
+            <div class="p-4 rounded-xl bg-slate-800/70 border border-purple-800/40 relative">
+              <div class="flex items-center gap-2 text-purple-300 font-bold text-sm mb-2">
+                <span class="w-6 h-6 rounded-full bg-purple-900/60 text-purple-200 text-xs flex items-center justify-center">1</span>
+                伺服端動態正則脫敏引擎 (Dynamic Regex Masking)
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                <strong>公眾名冊保護：</strong> 公開錄取清冊一律在後端 GAS 運算層即時執行字元遮罩處理，學童與家長中文姓名自動遮蔽中間字（如「陳*雄」）、10 碼電話遮蔽第 4~6 碼（如「0912-***-678」）、電子郵件遮蔽部分帳號與網域。
+              </p>
+            </div>
+
+            <!-- Track B: Realtime Preview -->
+            <div class="p-4 rounded-xl bg-slate-800/70 border border-cyan-800/40 relative">
+              <div class="flex items-center gap-2 text-cyan-300 font-bold text-sm mb-2">
+                <span class="w-6 h-6 rounded-full bg-cyan-900/60 text-cyan-200 text-xs flex items-center justify-center">2</span>
+                前端即時隱碼遮罩預覽與安心確認
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                <strong>填表安心體驗：</strong> 家長在線上填寫報名資料當下，前端介面即時動態呈現送出後公開名單之遮罩樣式，確保資訊透明同時讓家長清楚瞭解個資受到嚴密保護，符合個資法遵循標準。
+              </p>
+            </div>
+          </div>
+
+          <!-- Audit Log & RBAC -->
+          <div class="p-3 rounded-xl bg-slate-800/40 border border-slate-700/60 text-xs text-slate-300 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-clipboard-check text-cyan-400"></i>
+              <span><strong>權限嚴格隔離：</strong> 明文名單僅供登入授權處室之行政承辦調閱，未授權者與外部訪客僅可讀取隱碼後資料。</span>
+            </div>
+            <span class="px-2 py-0.5 rounded bg-slate-700 text-slate-300 text-[11px] font-mono">100% 個資合規</span>
+          </div>
+        </div>
+
+        <!-- SLIDE 6: Measurable Impact -->
+        <div id="slide-5" class="slide-content hidden space-y-5">
+          <div>
+            <span class="text-xs font-semibold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+              <i class="fa-solid fa-chart-line"></i> Measurable Impact
+            </span>
+            <h2 class="text-xl sm:text-3xl font-extrabold text-white mt-1">專案具體工作成效</h2>
+            <p class="text-slate-400 text-xs sm:text-sm mt-1">量化數據驗證：徹底解決行政痛點，樹立校園智慧轉型標竿。</p>
+          </div>
+
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3.5">
+            <!-- Metric 1 -->
+            <div class="p-4 rounded-xl bg-slate-800/80 border border-cyan-700/40 text-center space-y-1">
+              <div class="text-3xl sm:text-4xl font-black text-cyan-400">90%↓</div>
+              <div class="text-xs font-bold text-white">行政處理耗時</div>
+              <div class="text-[11px] text-slate-400">資格審核與簽到排版由數小時縮短至數秒</div>
+            </div>
+
+            <!-- Metric 2 -->
+            <div class="p-4 rounded-xl bg-slate-800/80 border border-emerald-700/40 text-center space-y-1">
+              <div class="text-3xl sm:text-4xl font-black text-emerald-400">$0</div>
+              <div class="text-xs font-bold text-white">伺服器租賃費用</div>
+              <div class="text-[11px] text-slate-400">完全相容 G Suite 教育雲，免去租約維運開銷</div>
+            </div>
+
+            <!-- Metric 3 -->
+            <div class="p-4 rounded-xl bg-slate-800/80 border border-purple-700/40 text-center space-y-1">
+              <div class="text-3xl sm:text-4xl font-black text-purple-400">0 爭議</div>
+              <div class="text-xs font-bold text-white">抽籤與公信力</div>
+              <div class="text-[11px] text-slate-400">弱勢優先保障 ＋ SHA-256 稽核防偽指紋</div>
+            </div>
+
+            <!-- Metric 4 -->
+            <div class="p-4 rounded-xl bg-slate-800/80 border border-blue-700/40 text-center space-y-1">
+              <div class="text-3xl sm:text-4xl font-black text-blue-400">100%</div>
+              <div class="text-xs font-bold text-white">個資法規遵循率</div>
+              <div class="text-[11px] text-slate-400">伺服端正則動態遮罩，公開透明且不洩漏個資</div>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-blue-950/30 border border-blue-800/50 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+            <div class="space-y-0.5">
+              <span class="font-bold text-blue-300">行政評價與實用性肯定：</span>
+              <p class="text-slate-300">教務、學務、總務與輔導室承辦人員一致肯定系統流暢度，大幅減少跨處室電話誤會與重複造冊作業。</p>
+            </div>
+            <button onclick="openLiveDemoModal()" class="px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold shrink-0 transition flex items-center gap-1.5">
+              <span>立即檢驗系統功能</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- SLIDE 7: Future Roadmap -->
+        <div id="slide-6" class="slide-content hidden space-y-5">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <div>
+              <span class="text-xs font-semibold uppercase tracking-wider text-cyan-400 flex items-center gap-1.5">
+                <i class="fa-solid fa-rocket"></i> Future Roadmap & AI Integration
+              </span>
+              <h2 class="text-xl sm:text-3xl font-extrabold text-white mt-1">未來展望與擴充功能</h2>
+              <p class="text-slate-400 text-xs sm:text-sm mt-1">從「報名、抽籤、簽到」延伸至「活動評估與覆盤」，建構校務智慧閉環。</p>
+            </div>
+            <span class="px-2.5 py-1 rounded-full bg-cyan-900/50 border border-cyan-500/40 text-cyan-300 text-xs font-bold">
+              新世代校務 AI 擴充
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Future 1 -->
+            <div class="p-4 rounded-xl bg-gradient-to-br from-slate-800 to-blue-950/60 border border-blue-600/40 space-y-2">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-blue-600/30 text-blue-400 flex items-center justify-center font-bold">
+                  <i class="fa-solid fa-envelope-circle-check"></i>
+                </div>
+                <h4 class="font-bold text-white text-sm">1. 問卷表單生成及主動派送</h4>
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                活動結束後，系統依據出席名單與錄取資料，自動調用 Google Forms API 動態生成客製化滿意度問卷，並經由 GmailApp 自動定向發送至參與家長信箱，省去人工催收與製作問卷時間。
+              </p>
+              <div class="text-[11px] text-cyan-400 flex items-center gap-1 pt-1">
+                <i class="fa-solid fa-circle-notch fa-spin text-[10px]"></i>
+                <span>自動追蹤回收率 ＋ 智慧防重複填答</span>
+              </div>
+            </div>
+
+            <!-- Future 2 -->
+            <div class="p-4 rounded-xl bg-gradient-to-br from-slate-800 to-purple-950/60 border border-purple-600/40 space-y-2">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-purple-600/30 text-purple-400 flex items-center justify-center font-bold">
+                  <i class="fa-solid fa-chart-pie"></i>
+                </div>
+                <h4 class="font-bold text-white text-sm">2. 活動覆盤檢討與分析簡報圖示生成</h4>
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                即時萃取問卷的質化心得與量化滿意度數據，自動繪製統計圖及行政分析雷達圖。
+              </p>
+              <div class="text-[11px] text-purple-300 flex items-center gap-1 pt-1">
+                <i class="fa-solid fa-sparkles text-[10px]"></i>
+                <span>數據即時視覺化 ＋ 行政決策支援</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Conclusion / Footer Signature -->
+          <div class="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700 flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div class="flex items-center gap-2 text-slate-300">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              <span><strong>報告團隊：</strong> <span class="text-emerald-400 font-bold">新北市國教輔導團 STEAM跨域分團</span></span>
+              <span class="text-slate-500">|</span>
+              <span class="text-slate-300">新北市信義國小 智慧校務協作成果</span>
+            </div>
+            <button onclick="restartPresentation()" class="text-cyan-400 hover:text-cyan-300 font-semibold flex items-center gap-1 transition">
+              <i class="fa-solid fa-rotate-left"></i> 回到首頁重新播放
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SLIDE NAVIGATION CONTROLS & TTS BAR -->
+      <div class="mt-4 bg-slate-900/90 border border-slate-800 rounded-xl p-3 flex flex-wrap items-center justify-between gap-3">
+        
+        <!-- Left: Slide Navigation Buttons -->
+        <div class="flex items-center gap-2">
+          <button id="btnPrevSlide" onclick="prevSlide()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold disabled:opacity-40 disabled:cursor-not-allowed transition flex items-center gap-1.5">
+            <i class="fa-solid fa-chevron-left"></i>
+            <span>上一頁</span>
+          </button>
+          
+          <button id="btnNextSlide" onclick="nextSlide()" class="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold disabled:opacity-40 disabled:cursor-not-allowed transition flex items-center gap-1.5">
+            <span>下一頁</span>
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+
+          <!-- Quick Jump Buttons (Dots) -->
+          <div class="hidden sm:flex items-center gap-1.5 ml-2" id="slideDotsContainer">
+            <!-- Dynamic Dots generated via JS -->
+          </div>
+        </div>
+
+        <!-- Center/Right: TTS Audio Narration Controls -->
+        <div class="flex items-center gap-2">
+          <!-- Voice Select (Optional Native Voice Switcher) -->
+          <button id="btnPlayTTS" onclick="toggleSpeech()" class="px-4 py-1.5 rounded-lg bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold shadow transition flex items-center gap-1.5">
+            <i id="playIcon" class="fa-solid fa-play"></i>
+            <span id="playButtonText">播放 1 分鐘連續導覽</span>
+          </button>
+          
+          <button onclick="stopSpeech()" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs transition" title="停止語音">
+            <i class="fa-solid fa-stop"></i>
+          </button>
+
+          <!-- Auto-advance Slides Toggle -->
+          <label class="flex items-center gap-1.5 text-xs text-emerald-400 font-semibold cursor-pointer ml-1 select-none">
+            <input type="checkbox" id="autoAdvanceCheckbox" checked class="rounded bg-slate-800 border-slate-700 text-emerald-500 focus:ring-0">
+            <span>自動跳轉下頁 (連續播放)</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Live Voice Subtitle Bar -->
+      <div class="mt-2 px-4 py-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80 text-xs text-slate-400 flex items-start gap-2.5">
+        <i class="fa-solid fa-comment-dots text-cyan-400 mt-0.5 shrink-0"></i>
+        <div class="flex-1">
+          <span class="font-bold text-slate-300">旁白字幕：</span>
+          <span id="currentVoiceSubtitle" class="text-slate-300 italic">點擊上方「播放 1 分鐘連續導覽」即可聆聽 STEAM 跨域分團連續極速語音介紹。</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- VIEW 2: NEW TAIPEI CITY EDUCATION BUREAU 115.10 STANDARD GRAPHIC CARD -->
+    <div id="cardViewContainer" class="hidden flex-1 flex flex-col justify-center items-center py-4">
+      <div class="max-w-3xl w-full bg-slate-900 border-2 border-blue-500/60 rounded-2xl shadow-2xl p-6 sm:p-8 relative overflow-hidden text-slate-100">
+        
+        <!-- Graphic Card Top Banner (Matching standard 115.10 template) -->
+        <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-5">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-lg shadow-md">
+              <i class="fa-solid fa-shapes"></i>
+            </div>
+            <div>
+              <div class="text-xs text-blue-400 font-bold uppercase tracking-wider">新北市 智慧校務行政應用分享範例</div>
+              <h2 class="text-lg sm:text-xl font-black text-white">活動報名與智慧行政管理系統</h2>
+            </div>
+          </div>
+          <span class="px-3 py-1 rounded-full bg-blue-900/80 border border-blue-500 text-cyan-300 font-extrabold text-xs">
+            115.10 標章
+          </span>
+        </div>
+
+        <!-- 5-Block Card Grid -->
+        <div class="space-y-4 text-xs sm:text-sm">
+          
+          <!-- Block 1: Tools -->
+          <div class="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700/80">
+            <div class="font-bold text-cyan-400 mb-1 flex items-center gap-1.5">
+              <i class="fa-solid fa-toolbox"></i> 【工具應用】
+            </div>
+            <p class="text-slate-300 leading-relaxed">
+              Google Apps Script (GAS) 微服務 + Google Sheets 雲端資料庫 + Vue 3 / Tailwind CSS 前端響應式單頁應用 (SPA)。
+            </p>
+          </div>
+
+          <!-- Block 2: Pain points -->
+          <div class="p-3.5 rounded-xl bg-rose-950/20 border border-rose-900/40">
+            <div class="font-bold text-rose-400 mb-1 flex items-center gap-1.5">
+              <i class="fa-solid fa-triangle-exclamation"></i> 【工作痛點】
+            </div>
+            <ol class="text-slate-300 space-y-1 list-decimal list-inside leading-relaxed">
+              <li><strong>資格比對耗時易錯：</strong> 傳統表單無年級防呆，跨年級誤報頻繁。</li>
+              <li><strong>個資去識別化困難：</strong> 公開名單易洩漏學童電話信箱，具法規風險。</li>
+              <li><strong>抽籤公信與簽到繁冗：</strong> 人工抽籤易生爭議，紙本核章排版耗時。</li>
+              <li><strong>報名名冊個資未妥善保護：</strong> 缺乏動態隱碼遮罩，公開容易外洩學生與家長資訊。</li>
+            </ol>
+          </div>
+
+          <!-- Block 3: Concrete Impact -->
+          <div class="p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-900/40">
+            <div class="font-bold text-emerald-400 mb-1 flex items-center gap-1.5">
+              <i class="fa-solid fa-bullseye"></i> 【具體成效】
+            </div>
+            <ol class="text-slate-300 space-y-1 list-decimal list-inside leading-relaxed">
+              <li><strong>行政耗時縮減 90%：</strong> 資格即時防呆 ＋ 一鍵產出四合一公文簽到表。</li>
+              <li><strong>零主機維運成本：</strong> 完全部署於教育版雲端，0 伺服器租賃費用。</li>
+              <li><strong>公正抽籤數位存證：</strong> Fisher-Yates 抽籤 ＋ SHA-256 防偽指紋。</li>
+              <li><strong>報名資訊隱碼處理：</strong> 報名資訊隱碼方式處理，以保護報名者個資。</li>
+            </ol>
+          </div>
+
+          <!-- Block 4: Future Expansion -->
+          <div class="p-3.5 rounded-xl bg-purple-950/20 border border-purple-900/40">
+            <div class="font-bold text-purple-400 mb-1 flex items-center gap-1.5">
+              <i class="fa-solid fa-sparkles"></i> 【未來功能】
+            </div>
+            <ol class="text-slate-300 space-y-1 list-decimal list-inside leading-relaxed">
+              <li><strong>問卷表單智慧生成與主動派送：</strong> 活動結束後自動寄送家長滿意度問卷。</li>
+              <li><strong>活動覆盤檢討與分析簡報圖示生成：</strong> 即時萃取問卷的質化心得與量化滿意度數據，自動繪製統計圖及行政分析雷達圖。</li>
+            </ol>
+          </div>
+
+          <!-- Block 3: Concrete Impact -->
+          <div class="p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-900/40">
+            <div class="font-bold text-emerald-400 mb-1 flex items-center gap-1.5">
+              <i class="fa-solid fa-bullseye"></i> 【具體成效】
+            </div>
+            <ol class="text-slate-300 space-y-1 list-decimal list-inside leading-relaxed">
+              <li><strong>行政耗時縮減 90%：</strong> 資格即時防呆 ＋ 一鍵產出四合一公文簽到表。</li>
+              <li><strong>零主機維運成本：</strong> 完全部署於教育版雲端，0 伺服器租賃費用。</li>
+              <li><strong>公正抽籤數位存證：</strong> Fisher-Yates 抽籤 ＋ SHA-256 防偽指紋。</li>
+              <li><strong>資安與帳號雙軌復原：</strong> 加鹽密碼雜湊 ＋ OTP/管理員雙軌重設。</li>
+            </ol>
+          </div>
+
+          <!-- Block 4: Future Expansion -->
+          <div class="p-3.5 rounded-xl bg-purple-950/20 border border-purple-900/40">
+            <div class="font-bold text-purple-400 mb-1 flex items-center gap-1.5">
+              <i class="fa-solid fa-sparkles"></i> 【未來功能】
+            </div>
+            <ol class="text-slate-300 space-y-1 list-decimal list-inside leading-relaxed">
+              <li><strong>問卷表單智慧生成與主動派送：</strong> 活動結束後自動寄送家長滿意度問卷。</li>
+              <li><strong>活動覆盤檢討與分析簡報圖示自動生成：</strong> AI 萃取量化回饋數據與直觀繪圖。</li>
+            </ol>
+          </div>
+
+          <!-- Block 5: Attribution -->
+          <div class="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700 flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <div class="font-bold text-slate-200">【報告與研發團隊】</div>
+              <div class="text-emerald-400 text-xs font-bold">
+                新北市國教輔導團 STEAM跨域分團
+              </div>
+            </div>
+            <div class="px-2.5 py-1 rounded-lg bg-slate-700/60 border border-slate-600 text-slate-300 text-xs font-medium">
+              新北市板橋區信義國民小學 協作
+            </div>
+          </div>
+
+        </div>
+
+        <div class="mt-5 text-center">
+          <button onclick="switchView('slides')" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition inline-flex items-center gap-2">
+            <i class="fa-solid fa-arrow-left"></i> 返回網頁互動簡報
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 3: COMPARISON TABLE VIEW -->
+    <div id="tableViewContainer" class="hidden flex-1 py-2">
+      <div class="bg-slate-900 rounded-2xl border border-slate-800 p-4 sm:p-6 overflow-hidden">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="font-bold text-base sm:text-lg text-white">工作痛點、現行解法與未來擴充對照表</h3>
+            <p class="text-xs text-slate-400">對比傳統人工與新北市信義國小智慧系統成效</p>
+          </div>
+          <button onclick="switchView('slides')" class="text-xs text-cyan-400 hover:underline">
+            返回簡報
+          </button>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-slate-300 border-collapse">
+            <thead>
+              <tr class="border-b border-slate-700 bg-slate-800/60 text-slate-200">
+                <th class="p-3 font-bold w-24">項目維度</th>
+                <th class="p-3 font-bold">原有工作痛點 (Before)</th>
+                <th class="p-3 font-bold">現行系統解決方案 (Solution)</th>
+                <th class="p-3 font-bold">具體成效與未來擴充 (Impact)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800">
+              <tr class="hover:bg-slate-800/30">
+                <td class="p-3 font-bold text-white">報名資格檢核</td>
+                <td class="p-3 text-rose-300">跨學段活動常有跨年級誤報，需仰賴承辦人逐筆人工檢視與電話確認。</td>
+                <td class="p-3 text-slate-200">前端正規表達式即時解析字元，比對 target_audience 資格，未符立即阻擋。</td>
+                <td class="p-3 text-emerald-400 font-semibold">審核耗時減少 95%，徹底杜絕跨年級誤報案件。</td>
+              </tr>
+              <tr class="hover:bg-slate-800/30">
+                <td class="p-3 font-bold text-white">個資隱私維護</td>
+                <td class="p-3 text-rose-300">公開錄取名冊為明文試算表，有外洩學童姓名、家長電話及信箱之風險。</td>
+                <td class="p-3 text-slate-200">伺服端建立動態正則脫敏引擎（中文名遮中間字、電話遮第 4~6 碼）。</td>
+                <td class="p-3 text-emerald-400 font-semibold">個資合規率 100%，維護公信力同時確保隱私安全。</td>
+              </tr>
+              <tr class="hover:bg-slate-800/30">
+                <td class="p-3 font-bold text-white">名額抽籤爭議</td>
+                <td class="p-3 text-rose-300">熱門營隊人工抽籤易遭質疑不公，且難以兼顧身分優先保障名額。</td>
+                <td class="p-3 text-slate-200">實作 Fisher-Yates 隨機演算，產出不可逆 SHA-256 數位防偽指紋。</td>
+                <td class="p-3 text-emerald-400 font-semibold">零抽籤爭議，保障弱勢生錄取，流程具完整可追溯性。</td>
+              </tr>
+              <tr class="hover:bg-slate-800/30">
+                <td class="p-3 font-bold text-white">活動簽到排版</td>
+                <td class="p-3 text-rose-300">承辦人員需手動將資料貼入 Word/Excel，重繪三級核章表格，格式常錯亂。</td>
+                <td class="p-3 text-slate-200">整合四合一公文列印模組，自帶正式公文表頭、統計數據與核章欄。</td>
+                <td class="p-3 text-emerald-400 font-semibold">排版耗時由 1 小時縮短至 5 秒，一鍵即可列印 A4 標準公文。</td>
+              </tr>
+              <tr class="hover:bg-slate-800/30">
+                <td class="p-3 font-bold text-white">個資隱私防護</td>
+                <td class="p-3 text-rose-300">公開名單與報名資料缺乏動態隱碼，家長電話與學生全名容易外洩引發資安爭議。</td>
+                <td class="p-3 text-slate-200">報名資訊隱碼方式處理，以保護報名者個資（姓名、電話、信箱動態脫敏）。</td>
+                <td class="p-3 text-emerald-400 font-semibold">個資 100% 去識別化，保障隱私與符合法規規範。</td>
+              </tr>
+              <tr class="hover:bg-slate-800/30 bg-purple-950/10">
+                <td class="p-3 font-bold text-purple-300">活動回饋收集<br><span class="text-[10px] text-purple-400">（未來功能）</span></td>
+                <td class="p-3 text-slate-400">手動製作 Google 表單並逐一複製信箱寄送，回收率低且催收繁瑣。</td>
+                <td class="p-3 text-purple-200">問卷表單動態生成，並透過 GmailApp 自動定向派送至參與者家長信箱。</td>
+                <td class="p-3 text-purple-300 font-semibold">滿意度調查全自動化，活動結束即刻派送，大幅提升問卷回收率。</td>
+              </tr>
+              <tr class="hover:bg-slate-800/30 bg-purple-950/10">
+                <td class="p-3 font-bold text-purple-300">效益覆盤檢討<br><span class="text-[10px] text-purple-400">（未來功能）</span></td>
+                <td class="p-3 text-slate-400">問卷數據需手動統計繪圖，撰寫覆盤檢討報告耗費數天，缺乏直觀可視化。</td>
+                <td class="p-3 text-purple-200">即時萃取問卷的質化心得與量化滿意度數據，自動繪製統計圖及行政分析雷達圖。</td>
+                <td class="p-3 text-purple-300 font-semibold">自動生成統計圖與雷達圖，直觀呈現活動成效，支援行政優化決策。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- MODAL: LIVE DEMO TEST EMBED / REDIRECT -->
+  <div id="liveDemoModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-4xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+      
+      <!-- Modal Header -->
+      <div class="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-800/80">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-emerald-600 flex items-center justify-center text-white text-sm">
+            <i class="fa-solid fa-vial-circle-check"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-sm sm:text-base text-white">信義國小活動報名系統 - 測試入口</h3>
+            <p class="text-xs text-slate-400">Google Apps Script 雲端部署正式測試連結</p>
+          </div>
+        </div>
+        <button onclick="closeLiveDemoModal()" class="w-8 h-8 rounded-lg bg-slate-700 hover:bg-slate-600 text-slate-300 flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6 space-y-4 overflow-y-auto">
+        <div class="p-4 rounded-xl bg-emerald-950/40 border border-emerald-800/60 text-xs text-emerald-200 space-y-2">
+          <div class="font-bold text-emerald-300 flex items-center gap-1.5 text-sm">
+            <i class="fa-solid fa-circle-check"></i> 測試端點已上線：
+          </div>
+          <div class="font-mono bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-slate-300 break-all select-all text-[11px]">
+            https://script.google.com/a/macros/gsuite.ntpc.edu.tw/s/AKfycbwVi7j5ipyi6nm-6Ta-fkkEuAAxWuEU7uIAq8l-SYLPk7BLaNISd7WDu10S4jLb2wiDPQ/exec
+          </div>
+          <p class="text-slate-400">
+            提示：由於 Google Workspace 網域權限與 iframe 跨域安全規範，建議您直接開啟獨立視窗體驗完整功能（包含前台報名防呆、加鹽後台登入、忘記密碼雙軌測試與四合一簽到列印）。
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+          <div class="p-3.5 rounded-xl bg-slate-800/60 border border-slate-700/60 text-xs space-y-1">
+            <div class="font-bold text-white flex items-center gap-1.5">
+              <i class="fa-solid fa-user-graduate text-cyan-400"></i> 前台家長報名體驗
+            </div>
+            <p class="text-slate-400 text-[11px]">
+              輸入「五年2班」嘗試報名不同年級活動，檢驗智慧防呆、即時去識別化預覽與 HTML 確認信發送。
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-slate-800/60 border border-slate-700/60 text-xs space-y-1">
+            <div class="font-bold text-white flex items-center gap-1.5">
+              <i class="fa-solid fa-shield-cat text-purple-400"></i> 後台行政管理體驗
+            </div>
+            <p class="text-slate-400 text-[11px]">
+              登入管理後台體驗 Fisher-Yates 公平抽籤、四合一公文簽到列印，以及忘記密碼雙軌復原機制。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-4 border-t border-slate-800 bg-slate-900 flex items-center justify-end gap-3">
+        <button onclick="closeLiveDemoModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">
+          關閉視窗
+        </button>
+        <a id="btnExternalLaunch" href="https://script.google.com/a/macros/gsuite.ntpc.edu.tw/s/AKfycbwVi7j5ipyi6nm-6Ta-fkkEuAAxWuEU7uIAq8l-SYLPk7BLaNISd7WDu10S4jLb2wiDPQ/exec" target="_blank" rel="noopener noreferrer" class="px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold shadow-lg transition flex items-center gap-2">
+          <span>在新分頁開啟測試系統</span>
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Condensed scripts calibrated to complete within 50~55 seconds at rate 1.2x
+    const slidesData = [
+      {
+        id: 0,
+        category: "封面與核心主題",
+        title: "數位轉型 × 行政減負：活動報名與智慧行政管理系統",
+        script: "各位長官、夥伴好！我們是新北市國教輔導團 STEAM 跨域分團。今天分享『活動報名與智慧行政管理系統』，透過微服務架構實現校園行政減負與數位轉型。"
+      },
+      {
+        id: 1,
+        category: "工作痛點剖析",
+        title: "校務活動行政之四大工作痛點",
+        script: "傳統校務活動面臨四大痛點：跨年級誤報查核耗時、公開名單缺乏個資遮罩、抽籤公信爭議與排版繁複，以及報名名冊個資未妥善保護導致外洩疑慮。"
+      },
+      {
+        id: 2,
+        category: "工具應用與系統架構",
+        title: "工具應用與雲端微服務架構",
+        script: "我們運用教育雲生態，以 Vue 3 結合 Google Apps Script 微服務與試算表，零主機維運租金，並建置加鹽雜湊與並行防超賣機制。"
+      },
+      {
+        id: 3,
+        category: "核心創新解法與流程",
+        title: "核心創新解法與行政流程",
+        script: "系統三大亮點：前端國字班級即時防呆、二階段公平抽籤附不可逆防偽指紋，以及一鍵產出四合一標準公文簽到名冊。"
+      },
+      {
+        id: 4,
+        category: "報名資訊隱碼與個資保護",
+        title: "報名資訊隱碼方式處理，以保護報名者個資",
+        script: "系統全面採用報名資訊隱碼方式處理，以保護報名者個資。透過伺服端動態正則脫敏引擎與即時遮罩預覽，杜絕姓名電話洩漏風險。"
+      },
+      {
+        id: 5,
+        category: "具體工作成效",
+        title: "專案具體工作成效",
+        script: "具體成效顯著：行政審查耗時縮減 90% 以上、主機費用零元、個資百分之百去識別化合規，樹立校務抽籤高公信力。"
+      },
+      {
+        id: 6,
+        category: "未來展望與擴充功能",
+        title: "未來展望與擴充功能",
+        script: "未來將擴充滿意度問卷動態派送，並即時萃取問卷的質化心得與量化數據，自動繪製統計圖及行政分析雷達圖。STEAM 跨域分團報告完畢，謝謝大家！"
+      }
+    ];
+
+    // State Variables
+    let currentSlide = 0;
+    const totalSlides = slidesData.length;
+    let isSpeaking = false;
+    let isContinuousPlaying = false;
+
+    // Web Speech Synthesis
+    const synth = window.speechSynthesis;
+    let currentUtterance = null;
+
+    // DOM Elements
+    const slideNumberDisplay = document.getElementById("slideNumberDisplay");
+    const slideCategoryDisplay = document.getElementById("slideCategoryDisplay");
+    const currentVoiceSubtitle = document.getElementById("currentVoiceSubtitle");
+    const soundBars = document.getElementById("soundBars");
+    const ttsStatusText = document.getElementById("ttsStatusText");
+    const playIcon = document.getElementById("playIcon");
+    const playButtonText = document.getElementById("playButtonText");
+    const slideDotsContainer = document.getElementById("slideDotsContainer");
+    const btnPrevSlide = document.getElementById("btnPrevSlide");
+    const btnNextSlide = document.getElementById("btnNextSlide");
+    const autoAdvanceCheckbox = document.getElementById("autoAdvanceCheckbox");
+
+    // Initialize Slide Navigation Dots
+    function initSlideDots() {
+      slideDotsContainer.innerHTML = "";
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement("button");
+        dot.className = `w-2.5 h-2.5 rounded-full transition-all ${i === currentSlide ? 'bg-cyan-400 w-6' : 'bg-slate-700 hover:bg-slate-500'}`;
+        dot.title = `切換至 Slide ${i + 1}`;
+        dot.onclick = () => {
+          stopSpeech();
+          goToSlide(i, false);
+        };
+        slideDotsContainer.appendChild(dot);
+      }
+    }
+
+    // Switch Presentation Views (Slides vs Graphic Card vs Comparison Table)
+    function switchView(mode) {
+      stopSpeech();
+      const slidesContainer = document.getElementById("slidesViewContainer");
+      const cardContainer = document.getElementById("cardViewContainer");
+      const tableContainer = document.getElementById("tableViewContainer");
+
+      const btnSlides = document.getElementById("btnViewSlides");
+      const btnCard = document.getElementById("btnViewCard");
+      const btnTable = document.getElementById("btnViewTable");
+
+      // Reset Styles
+      [btnSlides, btnCard, btnTable].forEach(btn => {
+        btn.className = "px-3 py-1.5 text-xs font-medium rounded-lg transition-all flex items-center gap-1.5 text-slate-400 hover:text-slate-200";
+      });
+
+      if (mode === 'slides') {
+        slidesContainer.classList.remove("hidden");
+        cardContainer.classList.add("hidden");
+        tableContainer.classList.add("hidden");
+        btnSlides.className = "px-3 py-1.5 text-xs font-medium rounded-lg transition-all flex items-center gap-1.5 bg-blue-600 text-white shadow-sm";
+      } else if (mode === 'card') {
+        slidesContainer.classList.add("hidden");
+        cardContainer.classList.remove("hidden");
+        tableContainer.classList.add("hidden");
+        btnCard.className = "px-3 py-1.5 text-xs font-medium rounded-lg transition-all flex items-center gap-1.5 bg-blue-600 text-white shadow-sm";
+      } else if (mode === 'table') {
+        slidesContainer.classList.add("hidden");
+        cardContainer.classList.add("hidden");
+        tableContainer.classList.remove("hidden");
+        btnTable.className = "px-3 py-1.5 text-xs font-medium rounded-lg transition-all flex items-center gap-1.5 bg-blue-600 text-white shadow-sm";
+      }
+    }
+
+    // Go to specific slide
+    function goToSlide(index, autoPlayNext = false) {
+      if (index < 0 || index >= totalSlides) return;
+
+      // Hide all slides
+      for (let i = 0; i < totalSlides; i++) {
+        const slideEl = document.getElementById(`slide-${i}`);
+        if (slideEl) slideEl.classList.add("hidden");
+      }
+
+      // Show target slide
+      currentSlide = index;
+      const targetEl = document.getElementById(`slide-${currentSlide}`);
+      if (targetEl) targetEl.classList.remove("hidden");
+
+      // Update Meta
+      slideNumberDisplay.textContent = `Slide ${currentSlide + 1} / ${totalSlides}`;
+      slideCategoryDisplay.textContent = slidesData[currentSlide].category;
+      currentVoiceSubtitle.textContent = slidesData[currentSlide].script;
+
+      // Update Nav Buttons
+      btnPrevSlide.disabled = currentSlide === 0;
+      btnNextSlide.disabled = currentSlide === totalSlides - 1;
+
+      // Update Dots
+      initSlideDots();
+
+      // Trigger narration if continuous mode is active
+      if (autoPlayNext) {
+        speakCurrentSlide();
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        goToSlide(currentSlide + 1, isContinuousPlaying);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        goToSlide(currentSlide - 1, false);
+      }
+    }
+
+    function restartPresentation() {
+      stopSpeech();
+      goToSlide(0, false);
+    }
+
+    function speakCurrentSlide() {
+      if (!('speechSynthesis' in window)) {
+        currentVoiceSubtitle.textContent = "您的瀏覽器暫不支援 Web Speech 語音合成。";
+        return;
+      }
+
+      synth.cancel(); // Stop any pending speech
+
+      const scriptText = slidesData[currentSlide].script;
+      currentUtterance = new SpeechSynthesisUtterance(scriptText);
+      
+      // Look for Taiwanese Mandarin or Chinese voice
+      const voices = synth.getVoices();
+      const zhVoice = voices.find(v => v.lang === 'zh-TW') || voices.find(v => v.lang.startsWith('zh'));
+      if (zhVoice) {
+        currentUtterance.voice = zhVoice;
+      }
+      currentUtterance.lang = 'zh-TW';
+      // Speed calibrated to 1.2x to ensure all 7 slides complete comfortably in ~50-55 seconds
+      currentUtterance.rate = 1.2;
+      currentUtterance.pitch = 1.0;
+
+      // Events
+      currentUtterance.onstart = () => {
+        isSpeaking = true;
+        soundBars.classList.remove("opacity-30");
+        ttsStatusText.textContent = `第 ${currentSlide + 1}/7 頁播音中...`;
+        ttsStatusText.classList.add("text-cyan-400");
+        playIcon.className = "fa-solid fa-pause";
+        playButtonText.textContent = "暫停導覽";
+      };
+
+      currentUtterance.onend = () => {
+        isSpeaking = false;
+        
+        // Auto Continuous Advance Check
+        if (autoAdvanceCheckbox.checked && isContinuousPlaying && currentSlide < totalSlides - 1) {
+          ttsStatusText.textContent = "跳轉下一頁...";
+          // Short 300ms pause between slides for optimal natural flow
+          setTimeout(() => {
+            nextSlide();
+          }, 350);
+        } else {
+          soundBars.classList.add("opacity-30");
+          ttsStatusText.textContent = currentSlide === totalSlides - 1 ? "🎉 1分鐘導覽完畢" : "語音待命";
+          ttsStatusText.classList.remove("text-cyan-400");
+          playIcon.className = "fa-solid fa-play";
+          playButtonText.textContent = currentSlide === totalSlides - 1 ? "重新播放 1 分鐘導覽" : "繼續播放";
+          if (currentSlide === totalSlides - 1) {
+            isContinuousPlaying = false;
+          }
+        }
+      };
+
+      currentUtterance.onerror = () => {
+        isSpeaking = false;
+        isContinuousPlaying = false;
+        soundBars.classList.add("opacity-30");
+        ttsStatusText.textContent = "語音待命";
+        playIcon.className = "fa-solid fa-play";
+        playButtonText.textContent = "播放 1 分鐘連續導覽";
+      };
+
+      synth.speak(currentUtterance);
+    }
+
+    function toggleSpeech() {
+      if (synth.speaking && isSpeaking) {
+        synth.cancel();
+        isSpeaking = false;
+        isContinuousPlaying = false;
+        soundBars.classList.add("opacity-30");
+        ttsStatusText.textContent = "已暫停";
+        playIcon.className = "fa-solid fa-play";
+        playButtonText.textContent = "繼續播放";
+      } else {
+        // If restarting from last slide, loop back to slide 0
+        if (currentSlide === totalSlides - 1 && !isSpeaking) {
+          goToSlide(0, false);
+        }
+        isContinuousPlaying = true;
+        speakCurrentSlide();
+      }
+    }
+
+    function stopSpeech() {
+      if (synth) {
+        synth.cancel();
+      }
+      isSpeaking = false;
+      isContinuousPlaying = false;
+      soundBars.classList.add("opacity-30");
+      ttsStatusText.textContent = "語音待命";
+      playIcon.className = "fa-solid fa-play";
+      playButtonText.textContent = "播放 1 分鐘連續導覽";
+    }
+
+    // Modal Control
+    function openLiveDemoModal() {
+      document.getElementById("liveDemoModal").classList.remove("hidden");
+    }
+
+    function closeLiveDemoModal() {
+      document.getElementById("liveDemoModal").classList.add("hidden");
+    }
+
+    // Keyboard Shortcuts (Arrow keys & Spacebar)
+    window.addEventListener("keydown", (e) => {
+      if (!document.getElementById("liveDemoModal").classList.contains("hidden")) {
+        if (e.key === "Escape") closeLiveDemoModal();
+        return;
+      }
+
+      if (e.key === "ArrowRight" || e.key === "PageDown") {
+        nextSlide();
+      } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
+        prevSlide();
+      } else if (e.key === " " && e.target === document.body) {
+        e.preventDefault();
+        toggleSpeech();
+      }
+    });
+
+    // Touch Gestures for Mobile (Swipe left/right)
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    window.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, false);
+
+    window.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, false);
+
+    function handleSwipe() {
+      if (touchEndX < touchStartX - 50) {
+        nextSlide();
+      }
+      if (touchEndX > touchStartX + 50) {
+        prevSlide();
+      }
+    }
+
+    // Initialization on window load
+    window.onload = function() {
+      initSlideDots();
+      goToSlide(0, false);
+
+      // Preload available voices
+      if ('speechSynthesis' in window) {
+        speechSynthesis.onvoiceschanged = () => {
+          // voices loaded
+        };
+      }
+    };
+  </script>
+</body>
+</html>
